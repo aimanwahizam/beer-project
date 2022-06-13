@@ -2,14 +2,15 @@ import React from "react";
 
 import "./Navbar.scss";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import Filter from "../../components/Filter/Filter"
+import FiltersList from "../FiltersList/FiltersList";
 
 const Navbar = () => {
   return (
     <div className="navbar">
-      NAV
       <SearchBar />
-      <Filter />
+      <div className="navbar__filters">
+        <FiltersList />
+      </div>
     </div>
   );
 };

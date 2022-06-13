@@ -3,7 +3,7 @@ import React from "react";
 import "./SearchBar.scss";
 
 const SearchBar = () => {
-  return <div>SearchBar</div>;
+  return <div className="search-bar">SearchBar</div>;
 };
 
 export default SearchBar;
