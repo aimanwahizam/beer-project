@@ -1,19 +1,26 @@
-import React from 'react';
+import React from "react";
 
 import "./CardList.scss";
-import Card from '../../components/Card/Card';
+import Card from "../../components/Card/Card";
 
-const CardList = () => {
+const CardList = (props) => {
+  const { beerArray } = props;
+
+  const beerCardsJSX = beerArray.map((beer) => {
+    return (
+      <Card
+        name={beer.name}
+        image={beer.image_url}
+        tagline={beer.tagline}
+        description={beer.description}
+      />
+    );
+  });
   return (
-    <div className='card-grid'>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+    <div className="card-grid">
+      {beerCardsJSX}
     </div>
-  )
-}
+  );
+};
 
-export default CardList
+export default CardList;
