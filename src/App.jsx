@@ -18,7 +18,7 @@ function App() {
 
   useEffect(() => {
     getBeers();
-  }, [])
+  }, []);
 
   /* -------------------------------------------------------------------------- */
   /*                                  Function                                  */
@@ -33,8 +33,11 @@ function App() {
 
   return (
     <div className="app">
-      <Navbar />
-      <Main beerArray={beers}/>
+      <h1>Punk Beers</h1>
+      <div className="app__content">
+        <Navbar />
+        <Main beerArray={beers} />
+      </div>
     </div>
   );
 }
