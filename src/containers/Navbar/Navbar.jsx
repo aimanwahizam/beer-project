@@ -4,12 +4,14 @@ import "./Navbar.scss";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import FiltersList from "../FiltersList/FiltersList";
 
-const Navbar = () => {
+const Navbar = (props) => {
+  const {} = props;
+
   return (
     <div className="navbar">
-      <SearchBar />
+      <SearchBar/>
       <div className="navbar__filters">
-        <FiltersList />
+        <FiltersList/>
       </div>
     </div>
   );

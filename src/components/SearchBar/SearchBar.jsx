@@ -2,11 +2,14 @@ import React from "react";
 
 import "./SearchBar.scss";
 
-const SearchBar = () => {
+const SearchBar = (props) => {
+  const {} = props;
+
   return (
-    <div>
+    <form>
       <input type={"text"} placeholder="Search..." className="search-bar"/>
-    </div>
+      <input type={"submit"} />
+    </form>
   );
 };
 

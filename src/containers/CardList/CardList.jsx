@@ -9,6 +9,7 @@ const CardList = (props) => {
   const beerCardsJSX = beerArray.map((beer) => {
     return (
       <Card
+        key={beer.id}
         name={beer.name}
         image={beer.image_url}
         tagline={beer.tagline}
