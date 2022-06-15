@@ -5,13 +5,13 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import FiltersList from "../FiltersList/FiltersList";
 
 const Navbar = (props) => {
-  const {} = props;
+  const {searchFunction, filterFunction} = props;
 
   return (
     <div className="navbar">
-      <SearchBar/>
+      <SearchBar searchFunction={searchFunction}/>
       <div className="navbar__filters">
-        <FiltersList/>
+        <FiltersList filterFunction={filterFunction}/>
       </div>
     </div>
   );
