@@ -13,6 +13,7 @@ function App() {
   const [beers, setBeers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterTerm, setFilterTerm] = useState("");
+  const [dataCopy, setDataCopy] = useState("");
 
   /* -------------------------------------------------------------------------- */
   /*                                   Effects                                  */
@@ -40,6 +41,7 @@ function App() {
     const response = await fetch(url);
     const data = await response.json();
     setBeers(data);
+    setDataCopy(data);
   };
 
   const handleSearchInput = (event) => {
@@ -47,23 +49,37 @@ function App() {
     setSearchTerm(event.target[0].value);
   };
 
-  const handleFilterClick = (event) => {
-    if (event.target.id != "acidic") {
-      if (event.target.checked === true) {
-        console.log(event.target.value);
-        setFilterTerm(event.target.value);
-      } else {
-        setFilterTerm("");
-      }
+  /* ---------------------------- Filter Functions ---------------------------- */
+
+  const urlFilterClick = (event) => {
+    if (event.target.checked === true) {
+      setFilterTerm(event.target.value);
     } else {
+      setFilterTerm("");
+    }
+  };
+
+  const handleFilterClick = (event) => {
+    if (event.target.id === "acidic") {
       if (event.target.checked === true) {
         const acidicArray = beers.filter((beer) => {
           return beer.ph < 4;
         });
         setBeers(acidicArray);
       } else {
-        setBeers(beers)
+        setBeers(dataCopy);
       }
+    } else if (event.target.id === "keg") {
+        if(event.target.checked === true) {
+          const kegArray = beers.filter(beer => {
+            return beer.image_url.includes("/keg")
+          })
+          setBeers(kegArray)
+        } else {
+          setBeers(dataCopy)
+        }
+    } else {
+      urlFilterClick(event);
     }
   };
 

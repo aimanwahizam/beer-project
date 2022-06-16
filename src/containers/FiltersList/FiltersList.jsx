@@ -18,10 +18,16 @@ const FiltersList = (props) => {
         title="Classic Range"
         id="classic-range"
         filterFunction={filterFunction}
+        value="brewed_before=01-2010"
       />
       <Filter
         title="Acidic (ph < 4)"
         id="acidic"
+        filterFunction={filterFunction}
+      />
+      <Filter
+        title="Keg"
+        id="keg"
         filterFunction={filterFunction}
       />
     </div>
