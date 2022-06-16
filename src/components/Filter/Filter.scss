@@ -1,12 +1,20 @@
-.filter {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-right: 0.5rem;
-    margin-left: 0.5rem;
+@use "../../assets/sass/variables" as *;
 
-    &__box {
-        position: relative;
-        top: 0.38rem;
-    }
+.filter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+
+  &__title {
+    font-family: $font-filter;
+    font-size: $font-medium;
+    font-weight: 500;
+  }
+
+  &__box {
+    position: relative;
+    top: 0.38rem;
+  }
 }

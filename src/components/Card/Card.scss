@@ -1,14 +1,25 @@
+@use "../../assets/sass/variables" as *;
+
 .card {
-    border: 2px solid black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    height: 25rem;
-    padding: 1rem;
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 25rem;
+  padding: 1rem;
 
+  &__title {
+    font-family: $font-title;
+    font-size: $font-medium;
+  }
 
-    &__image {
-        max-height: 15rem;
-    }
+  &__image {
+    max-height: 15rem;
+  }
+
+  &__tagline {
+    font-family: $font-text;
+    font-size: $font-small;
+  }
 }

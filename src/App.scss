@@ -1,20 +1,26 @@
+@use "../src/assets/sass/variables.scss" as *;
+
 * {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .app {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
 
-    &__content {
-        margin: 1rem;
-        padding: 0.75rem;
-        border: 2px solid black;
-        display: flex;
-        flex-direction: row;
-    }
+  &__title {
+    font-family: $font-title;
+  }
+
+  &__content {
+    margin: 1rem;
+    padding: 0.75rem;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: row;
+  }
 }

@@ -70,14 +70,14 @@ function App() {
         setBeers(dataCopy);
       }
     } else if (event.target.id === "keg") {
-        if(event.target.checked === true) {
-          const kegArray = beers.filter(beer => {
-            return beer.image_url.includes("/keg")
-          })
-          setBeers(kegArray)
-        } else {
-          setBeers(dataCopy)
-        }
+      if (event.target.checked === true) {
+        const kegArray = beers.filter((beer) => {
+          return beer.image_url.includes("/keg");
+        });
+        setBeers(kegArray);
+      } else {
+        setBeers(dataCopy);
+      }
     } else {
       urlFilterClick(event);
     }
@@ -89,7 +89,7 @@ function App() {
 
   return (
     <div className="app">
-      <h1>Punk Beers</h1>
+      <h1 className="app__title">Punk Beers</h1>
       <div className="app__content">
         <Navbar
           searchFunction={handleSearchInput}
