@@ -24,8 +24,14 @@ const FiltersList = (props) => {
         title="Acidic (ph < 4)"
         id="acidic"
         filterFunction={filterFunction}
+        value="acidic"
       />
-      <Filter title="Keg" id="keg" filterFunction={filterFunction} />
+      <Filter
+        title="Keg"
+        id="keg"
+        filterFunction={filterFunction}
+        value="keg"
+      />
     </div>
   );
 };

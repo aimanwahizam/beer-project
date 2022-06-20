@@ -14,6 +14,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterTerm, setFilterTerm] = useState("");
   const [dataCopy, setDataCopy] = useState("");
+  const [filtersArray, setFiltersArray] = useState([]);
 
   /* -------------------------------------------------------------------------- */
   /*                                   Effects                                  */
@@ -28,7 +29,7 @@ function App() {
   /* -------------------------------------------------------------------------- */
 
   const getBeers = async (beerName, filter) => {
-    let url = "https://api.punkapi.com/v2/beers";
+    let url = "https://api.punkapi.com/v2/beers?";
 
     if (beerName && !filter) {
       url += `?beer_name=${beerName}`;
@@ -83,12 +84,51 @@ function App() {
     }
   };
 
+  // Filter Function 2.0
 
-  // Test 
-  // Test 
-  // Test 
+  const pushFiltersToArray = (event) => {
+    const copyFiltersArray = [...filtersArray];
+    const filter = event.target.value;
+    if (event.target.checked === true) {
+      console.log(filter);
+      copyFiltersArray.push(filter);
+    } else {
+      if (copyFiltersArray.includes(filter)) {
+        copyFiltersArray.pop(filter);
+      }
+    }
+    setFiltersArray(copyFiltersArray);
+    console.log(filtersArray);
+  };
 
+  const getBeers2 = async (beerName, filters) => {
+    let url = "https://api.punkapi.com/v2/beers";
 
+    const response = await fetch(url);
+    const data = await response.json();
+    setBeers(data);
+    setDataCopy(data);
+
+    filters.forEach((filter) => {
+      switch (filter) {
+        case "abv_gt=6" && "brewed_before=01-2010":
+          url += `${filter}`;
+          break;
+        case "acidic":
+          const acidicArray = beers.filter((beer) => {
+            return beer.ph < 4;
+          });
+          setBeers(acidicArray);
+          break;
+        case "keg":
+          const kegArray = beers.filter((beer) => {
+            return beer.image_url.includes("/keg");
+          });
+          setBeers(kegArray);
+          break;
+      }
+    });
+  };
 
   /* -------------------------------------------------------------------------- */
   /*                                   Return                                   */
@@ -100,7 +140,7 @@ function App() {
       <div className="app__content">
         <Navbar
           searchFunction={handleSearchInput}
-          filterFunction={handleFilterClick}
+          filterFunction={pushFiltersToArray}
         />
         <Main beerArray={beers} />
       </div>
