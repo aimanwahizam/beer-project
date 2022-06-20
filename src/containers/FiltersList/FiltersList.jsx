@@ -26,12 +26,6 @@ const FiltersList = (props) => {
         filterFunction={filterFunction}
         value="acidic"
       />
-      <Filter
-        title="Keg"
-        id="keg"
-        filterFunction={filterFunction}
-        value="keg"
-      />
     </div>
   );
 };

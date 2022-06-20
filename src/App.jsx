@@ -12,8 +12,6 @@ function App() {
 
   const [beers, setBeers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filterTerm, setFilterTerm] = useState("");
-  const [dataCopy, setDataCopy] = useState("");
   const [filtersArray, setFiltersArray] = useState([]);
 
   /* -------------------------------------------------------------------------- */
@@ -28,63 +26,12 @@ function App() {
   /*                                  Function                                  */
   /* -------------------------------------------------------------------------- */
 
-  const getBeers = async (beerName, filter) => {
-    let url = "https://api.punkapi.com/v2/beers?";
-
-    if (beerName && !filter) {
-      url += `?beer_name=${beerName}`;
-    } else if (!beerName && filter) {
-      url += `?${filter}`;
-    } else if (beerName && filter) {
-      url += `?beer_name=${beerName}&${filter}`;
-    }
-
-    const response = await fetch(url);
-    const data = await response.json();
-    setBeers(data);
-    setDataCopy(data);
-  };
-
   const handleSearchInput = (event) => {
     event.preventDefault();
     setSearchTerm(event.target[0].value);
   };
 
   /* ---------------------------- Filter Functions ---------------------------- */
-
-  const urlFilterClick = (event) => {
-    if (event.target.checked === true) {
-      setFilterTerm(event.target.value);
-    } else {
-      setFilterTerm("");
-    }
-  };
-
-  const handleFilterClick = (event) => {
-    if (event.target.id === "acidic") {
-      if (event.target.checked === true) {
-        const acidicArray = beers.filter((beer) => {
-          return beer.ph < 4;
-        });
-        setBeers(acidicArray);
-      } else {
-        setBeers(dataCopy);
-      }
-    } else if (event.target.id === "keg") {
-      if (event.target.checked === true) {
-        const kegArray = beers.filter((beer) => {
-          return beer.image_url.includes("/keg");
-        });
-        setBeers(kegArray);
-      } else {
-        setBeers(dataCopy);
-      }
-    } else {
-      urlFilterClick(event);
-    }
-  };
-
-  // Filter Function 2.0
 
   const pushFiltersToArray = (event) => {
     const copyFiltersArray = [...filtersArray];
@@ -114,23 +61,13 @@ function App() {
           url[url.length - 1] != "?"
             ? (url += `&${filter}`)
             : (url += `${filter}`);
+          console.log(url);
           break;
         case "brewed_before=01-2010":
           url[url.length - 1] != "?"
             ? (url += `&${filter}`)
             : (url += `${filter}`);
-          break;
-        case "acidic":
-          const acidicArray = beers.filter((beer) => {
-            return beer.ph < 4;
-          });
-          setBeers(acidicArray);
-          break;
-        case "keg":
-          const kegArray = beers.filter((beer) => {
-            return beer.image_url.includes("/keg");
-          });
-          setBeers(kegArray);
+          console.log(url);
           break;
       }
     });
@@ -138,7 +75,17 @@ function App() {
     const response = await fetch(url);
     const data = await response.json();
     setBeers(data);
-    setDataCopy(data);
+
+    filters.forEach((filter) => {
+      switch (filter) {
+        case "acidic":
+          const acidicArray = data.filter((beer) => {
+            return beer.ph < 4;
+          });
+          setBeers(acidicArray);
+          break;
+      }
+    });
   };
 
   /* -------------------------------------------------------------------------- */
