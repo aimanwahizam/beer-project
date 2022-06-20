@@ -21,8 +21,8 @@ function App() {
   /* -------------------------------------------------------------------------- */
 
   useEffect(() => {
-    getBeers(searchTerm, filterTerm);
-  }, [searchTerm, filterTerm]);
+    getBeers2(searchTerm, filtersArray);
+  }, [searchTerm, filtersArray]);
 
   /* -------------------------------------------------------------------------- */
   /*                                  Function                                  */
@@ -102,17 +102,23 @@ function App() {
   };
 
   const getBeers2 = async (beerName, filters) => {
-    let url = "https://api.punkapi.com/v2/beers";
+    let url = "https://api.punkapi.com/v2/beers?";
 
-    const response = await fetch(url);
-    const data = await response.json();
-    setBeers(data);
-    setDataCopy(data);
+    if (beerName) {
+      url += `beer_name=${beerName}`;
+    }
 
     filters.forEach((filter) => {
       switch (filter) {
-        case "abv_gt=6" && "brewed_before=01-2010":
-          url += `${filter}`;
+        case "abv_gt=6":
+          url[url.length - 1] != "?"
+            ? (url += `&${filter}`)
+            : (url += `${filter}`);
+          break;
+        case "brewed_before=01-2010":
+          url[url.length - 1] != "?"
+            ? (url += `&${filter}`)
+            : (url += `${filter}`);
           break;
         case "acidic":
           const acidicArray = beers.filter((beer) => {
@@ -128,6 +134,11 @@ function App() {
           break;
       }
     });
+
+    const response = await fetch(url);
+    const data = await response.json();
+    setBeers(data);
+    setDataCopy(data);
   };
 
   /* -------------------------------------------------------------------------- */
